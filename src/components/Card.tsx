@@ -9,7 +9,9 @@ export default function Card({ className, ...props }: CardProps) {
   return (
     <div
       {...props}
-      className={`${className} rounded-md shadow-sm shadow-[#7a34eb]`}
+      className={`${className} rounded-md shadow-sm shadow-[#7a34eb] `}
     ></div>
   );
 }
+
+

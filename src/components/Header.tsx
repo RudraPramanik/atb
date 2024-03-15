@@ -1,12 +1,14 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-gray-800 text-white py-4">
+    <header className="bg-[#350880] text-white py-4">
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center">
-          <img src="/logo.png" alt="Logo" className="h-8 mr-4" />
+        <div className="flex items-center space-x-4 ">
+          <Image src="/logo.png" alt="Logo" width={50} height={40} />
           <h1 className="text-lg font-semibold">Job Platform</h1>
         </div>
         <nav>
@@ -20,9 +22,6 @@ const Header: React.FC = () => {
               <Link href="/profile">
                 Profile
               </Link>
-            </li>
-            <li>
-              <button className="hover:text-gray-300">Login/Logout</button>
             </li>
           </ul>
         </nav>

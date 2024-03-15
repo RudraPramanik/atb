@@ -39,18 +39,56 @@ const Login = () => {
 
   return (
     <Layout>
-        <Container>
-    <div>
-      <h1>Login Page</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="email" name="email" value={credentials.email} onChange={handleChange} placeholder="Email" required />
-        <input type="password" name="password" value={credentials.password} onChange={handleChange} placeholder="Password" required />
-        <button type="submit">Login</button>
-      </form>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-    </div>
-    </Container>
+      <Container>
+        <div className="flex flex-col items-center justify-center min-h-screen">
+          <h1 className="text-3xl font-bold mb-4">Login</h1>
+          <form onSubmit={handleSubmit} className="w-full max-w-sm">
+            <div className="mb-4">
+              <input
+                type="email"
+                name="email"
+                value={credentials.email}
+                onChange={handleChange}
+                placeholder="Email"
+                required
+                className="appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+              />
+            </div>
+            <div className="mb-4">
+              <input
+                type="password"
+                name="password"
+                value={credentials.password}
+                onChange={handleChange}
+                placeholder="Password"
+                required
+                className="appearance-none border rounded-md w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-[#350880] hover:bg-[#100880] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Login
+            </button>
+          </form>
+          {error && <p className="text-red-500 mt-4">{error}</p>}
+        </div>
+      </Container>
     </Layout>
+    // <Layout>
+    //     <Container>
+    // <div>
+    //   <h1>Login Page</h1>
+    //   <form onSubmit={handleSubmit}>
+    //     <input type="email" name="email" value={credentials.email} onChange={handleChange} placeholder="Email" required />
+    //     <input type="password" name="password" value={credentials.password} onChange={handleChange} placeholder="Password" required />
+    //     <button type="submit">Login</button>
+    //   </form>
+    //   {error && <p style={{ color: 'red' }}>{error}</p>}
+    // </div>
+    // </Container>
+    // </Layout>
   );
 };
 
