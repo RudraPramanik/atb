@@ -8,7 +8,6 @@ interface ChartDataItem {
   totalCandidates: number;
 }
 
-// Added type annotations to the exported interface for clarity
 export interface ChartComponentProps {
   chartData: ChartDataItem[];
 }

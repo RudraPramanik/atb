@@ -66,8 +66,7 @@ const JobListing: React.FC<{ jobs: Job[] }> = ({ jobs }) => {
         </div>{" "}
       </div>
       <div>
-        {/* Render filtered jobs */}
-        {/*  */}
+        {/* filtered jobs */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 " >
         {filteredJobs.map((job) => (
           
