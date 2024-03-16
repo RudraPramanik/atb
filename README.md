@@ -18,3 +18,4 @@ https://atb-ten.vercel.app/
 App feature:
 * to view the profile(protected route) page user have to login, its a token based login
 * user will be redirected to login page when visit profile page if user dont have the token
+* user can view job charts and job listing, also can filter with job listing
