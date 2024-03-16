@@ -6,12 +6,11 @@ import JobChart from "@/components/JobChart";
 import Card from "@/components/Card";
 import CompareOpening from "@/components/CompareOpening";
 import JobListing from "@/components/JobListing";
-import { ChartDataItem } from "@/components/JobChart";
 import { Job } from "@/components/JobListing";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const sampleJobStats: ChartDataItem[] = [
+const sampleJobStats = [
   { month: "Jan", totalJobs: 20, totalCandidates: 35 },
   { month: "Feb", totalJobs: 15, totalCandidates: 28 },
   { month: "Mar", totalJobs: 22, totalCandidates: 40 },

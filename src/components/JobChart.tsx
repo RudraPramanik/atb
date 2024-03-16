@@ -74,8 +74,8 @@ const JobChart: React.FC<ChartComponentProps> = ({ chartData }) => {
       <Bar
         data={data}
         options={options}
-        onClick={(event:any) => setActiveIndex(event.native.index)}
-        activeIndex={activeIndex === -1 ? null : activeIndex}
+        // onClick={(event:any) => setActiveIndex(event.native.index)}
+        // activeIndex={activeIndex === -1 ? null : activeIndex}
       />
     </div>
   );
