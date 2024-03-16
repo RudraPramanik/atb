@@ -3,7 +3,7 @@ import { Bar } from 'react-chartjs-2';
 import 'chart.js/auto';
 
 const JobChart = ({ chartData }) => {
-  const [activeIndex, setActiveIndex] = useState(-1); // Track active chart bar
+  const [activeIndex, setActiveIndex] = useState(-1); 
 
   const data = {
     labels: chartData.map(({ month }) => month),
@@ -11,30 +11,30 @@ const JobChart = ({ chartData }) => {
       {
         label: 'Total Jobs',
         data: chartData.map(({ totalJobs }) => totalJobs),
-        backgroundColor: '#600AFF', // Customize colors
-        hoverBackgroundColor: '#2980b9', // Customize hover colors
+        backgroundColor: '#600AFF',
+        hoverBackgroundColor: '#2980b9', 
       },
       {
         label: 'Total Candidates',
         data: chartData.map(({ totalCandidates }) => totalCandidates),
-        backgroundColor: '#DACCF4', // Customize colors
-        hoverBackgroundColor: '#C9AC55', // Customize hover colors
+        backgroundColor: '#DACCF4', 
+        hoverBackgroundColor: '#C9AC55', 
       },
     ],
   };
 
   const options = {
-    indexAxis: 'x', // Vertical bars
-    maintainAspectRatio: false, // Enable responsive resizing
+    indexAxis: 'x', 
+    maintainAspectRatio: false, 
     scales: {
       yAxes: [
         {
           ticks: {
             beginAtZero: true,
-            suggestedMax: 50, // Adjust based on expected values
+            suggestedMax: 50, 
           },
           gridLines: {
-            display: false , // Show grid lines
+            display: false , 
           },
         },
       ],
@@ -43,17 +43,20 @@ const JobChart = ({ chartData }) => {
       datalabels: {
         anchor: 'end',
         align: 'right',
-        formatter: (value) => `$${value}`, // Display dollar signs
+        formatter: (value) => `$${value}`, 
       },
+      // Enable tooltips
       tooltip: {
-        enabled: true, // Enable tooltips
+        enabled: true, 
         callbacks: {
           label: (context) => `${context.dataset.label}: $${context.formattedValue}`, // Custom tooltip format
         },
       },
+      // Show legend
+      // Place legend on the right
       legend: {
-        display: false, // Show legend
-        position: 'right', // Place legend on the right
+        display: false, 
+        position: 'right', 
       },
     },
   };
@@ -64,7 +67,8 @@ const JobChart = ({ chartData }) => {
         data={data}
         options={options}
         onClick={(event) => setActiveIndex(event.native.index)}
-        activeIndex={activeIndex === -1 ? null : activeIndex} // Handle null for hover styling
+        activeIndex={activeIndex === -1 ? null : activeIndex} 
+        // Handle null for hover styling
       />
     </div>
   );

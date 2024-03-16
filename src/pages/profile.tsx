@@ -1,65 +1,88 @@
-import React from "react";
-import Header from "../components/Header";
-import AuthGuard from "../components/AuthGuard";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Layout from "@/components/Layout";
 import Container from "@/components/Container";
-import Image from "next/image";
 import Card from "@/components/Card";
+import SpinnerIcon from "@/components/Icon/SpinnerIcon";
+import AuthGuard from "@/components/AuthGuard";
 
-const Profile = ({ userData }) => {
+interface UserData {
+  user: {
+    name: string;
+    email: string;
+    contact_number: string;
+  };
+  employer: {
+    id: number;
+    employer_name: string;
+    slug: string;
+    contact: string;
+    specialization: string;
+  }[];
+}
+
+interface ProfileProps {
+  userData: UserData | null;
+}
+
+const Profile: React.FC<ProfileProps> = ({ userData }) => {
   const router = useRouter();
-  const { user, employer } = userData;
+  const { user, employer } = userData || {};
+  const [loading, setLoading] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     router.push("/login");
   };
-  console.log(userData);
+
+  if (loading || !userData) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <SpinnerIcon className="w-8 h-8 text-[#350880]" />
+      </div>
+    );
+  }
 
   return (
     <Layout>
       <Container>
+        <AuthGuard>
         <div>
-          {/* <Header /> */}
-          <AuthGuard>
-            <h1>Profile Page</h1>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 ">
-              <Card className="p-4">
-                <h2 className="text-xl font-semibold ">User Details</h2>
-                {user && (
-                  <div>
-                    <p>Name: {user.name}</p>
-                    <p>Email: {user.email}</p>
-                    <p>Contact Number: {user.contact_number}</p>
-                  </div>
-                )}
-              </Card>
-              <Card className="p-4">
-                <h2 className="text-xl font-semibold ">Employer Details</h2>
-                {employer && (
-                  <div>
-                    <p>Employer Name: {employer[0].employer_name}</p>
-                    <p>{employer[0].slug}</p>
-                    <p>Contact: {employer[0].contact}</p>
+          <h1 className="text-2xl my-6 font-semibold">{user?.name}</h1>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+            <Card className="p-4">
+              <h2 className="text-xl font-semibold">User Details</h2>
+              <div>
+                <p>Name: {user?.name}</p>
+                <p>Email: {user?.email}</p>
+                <p>Contact Number: {user?.contact_number}</p>
+              </div>
+            </Card>
+            <Card className="p-4">
+              <h2 className="text-xl font-semibold">Employer Details</h2>
+              {employer && (
+                <div>
+                  <p>Employer Name: {employer[0].employer_name}</p>
+                  <p>{employer[0].slug}</p>
+                  <p>Contact: {employer[0].contact}</p>
+                  <p>Specialization: {employer[0].specialization}</p>
+                </div>
+              )}
+            </Card>
+          </div>
 
-                    <p>Specialization: {employer[0].specialization}</p>
-                  </div>
-                )}
-              </Card>
-            </div>
-
-            <div className="flex justify-center my-10 " >
-              <button
-                onClick={handleLogout}
-                type="submit"
-                className="bg-[#350880] hover:bg-[#100880] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              >
-                Logout
-              </button>
-            </div>
-          </AuthGuard>
+          <div className="flex justify-center my-10">
+            <button
+              onClick={handleLogout}
+              type="submit"
+              className="bg-[#350880] hover:bg-[#100880] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Logout
+            </button>
+          </div>
         </div>
+        </AuthGuard>
+      
       </Container>
     </Layout>
   );

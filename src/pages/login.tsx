@@ -1,21 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Layout from '@/components/Layout';
 import Container from '@/components/Container';
+import SpinnerIcon from '@/components/Icon/SpinnerIcon';
 
-const Login = () => {
+const Login: React.FC = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleChange = (e) => {
+  useEffect(() => {
+    if (loading) {
+      const handleRouteChange = () => setLoading(false);
+      router.events.on('routeChangeComplete', handleRouteChange);
+      return () => {
+        router.events.off('routeChangeComplete', handleRouteChange);
+      };
+    }
+  }, [loading, router.events]);
+
+  // form value change handler
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setCredentials({ ...credentials, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  // form submit handler
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await fetch('https://run.mocky.io/v3/961e27b4-4694-47e1-9ce6-fea6664ff40a', {
         method: 'POST',
         headers: {
@@ -25,15 +40,16 @@ const Login = () => {
       });
       const data = await response.json();
       if (data.success) {
-        // Save token to local storage or session storage
         localStorage.setItem('token', data.response.data.token);
-        // Redirect to dashboard if authentication is successful
         router.push('/profile');
       } else {
         setError(data.errors[0].message);
+        setLoading(false);
       }
     } catch (error) {
       console.error('Error:', error);
+      setError('An error occurred. Please try again.');
+      setLoading(false);
     }
   };
 
@@ -68,7 +84,9 @@ const Login = () => {
             <button
               type="submit"
               className="bg-[#350880] hover:bg-[#100880] text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              disabled={loading}
             >
+              {loading ? <SpinnerIcon className="animate-spin mr-2 h-4 w-4" /> : null} {/* Display the spinner icon if loading */}
               Login
             </button>
           </form>
@@ -76,19 +94,6 @@ const Login = () => {
         </div>
       </Container>
     </Layout>
-    // <Layout>
-    //     <Container>
-    // <div>
-    //   <h1>Login Page</h1>
-    //   <form onSubmit={handleSubmit}>
-    //     <input type="email" name="email" value={credentials.email} onChange={handleChange} placeholder="Email" required />
-    //     <input type="password" name="password" value={credentials.password} onChange={handleChange} placeholder="Password" required />
-    //     <button type="submit">Login</button>
-    //   </form>
-    //   {error && <p style={{ color: 'red' }}>{error}</p>}
-    // </div>
-    // </Container>
-    // </Layout>
   );
 };
 
