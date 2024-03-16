@@ -3,7 +3,7 @@ import Card from "./Card";
 
 const CompareOpening = () => {
   return (
-    <Card className="p-4 shadow-md max-w-lg space-y-4 py-10 ">
+    <Card className="p-4 shadow-md max-w-xl space-y-4 py-10 ">
       <div>
         <p className="text-lg font-medium ">Javascript VS Python Job Opening</p>
       </div>
