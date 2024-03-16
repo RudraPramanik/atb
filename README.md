@@ -19,6 +19,7 @@ App feature:
 * to view the profile(protected route) page user have to login, its a token based api authentication
 * user will be redirected to login page when visit profile page if user dont have the token
 * user can view job charts and job listing, also can filter with job listing
+* Protected profile page data is from api integration with NextJS SSR
 
 
 #Techstack used hare
