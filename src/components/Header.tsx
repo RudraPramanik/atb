@@ -9,7 +9,7 @@ const Header: React.FC = () => {
     <header className="bg-[#350880] text-white py-4">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center space-x-4 ">
-          <Image src="/logo.png" alt="Logo" width={50} height={40} />
+        <ProfileIcon/>
           <h1 className="text-lg font-semibold">Job Platform</h1>
         </div>
         <nav>
@@ -32,9 +32,9 @@ const Header: React.FC = () => {
           </ul>
         </nav>
         <div>
-          <Link href="/profile" >
+          {/* <Link href="/profile" >
          <ProfileIcon/>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </header>
